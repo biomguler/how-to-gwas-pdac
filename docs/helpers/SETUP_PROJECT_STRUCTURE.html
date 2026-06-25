@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Cleaning your data: quality control – How to carry out a GWAS</title>
+<title>setup_project_structure – How to carry out a GWAS</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -58,29 +61,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./getting_started.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-969ddfa49e00a70eb3423444dbc81f6c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d1ee2027f95721f733021c1cb64b93e1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-bad0ee1f8923344779b963586a61fdae.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-d1ee2027f95721f733021c1cb64b93e1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-6b6957c917596b414ec0b78690761e87.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-118f318e48b2d4647ee6a0da8287bf7c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-eec9b89cc14acb9f77d03dd0c8f79a7b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-118f318e48b2d4647ee6a0da8287bf7c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -110,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -284,7 +285,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./qc.html">Cleaning the data</a></li><li class="breadcrumb-item"><a href="./qc.html">Cleaning your data: quality control</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      How to carry out a GWAS
+      </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -298,11 +301,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
-      <a href="./index.html" class="sidebar-logo-link">
-      </a>
-      <div class="sidebar-tools-main">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">How to carry out a GWAS</a> 
+        <div class="sidebar-tools-main">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
+    </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -313,7 +317,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -328,25 +332,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./getting_started.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Before you start: setup and your first PLINK command</span></a>
+  <a href="../../getting_started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Before you start: setup</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Cleaning the data</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Quality control</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./qc.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Cleaning your data: quality control</span></a>
+  <a href="../../sections/01B_genotyping_qc/01B_genotyping_qc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genotyping quality control</span></a>
   </div>
 </li>
       </ul>
@@ -361,220 +365,246 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sec-geno" id="toc-sec-geno" class="nav-link active" data-scroll-target="#sec-geno">Step 1 — Remove poorly genotyped variants</a></li>
-  <li><a href="#sec-mind" id="toc-sec-mind" class="nav-link" data-scroll-target="#sec-mind">Step 2 — Remove poorly genotyped samples</a></li>
-  <li><a href="#sec-maf" id="toc-sec-maf" class="nav-link" data-scroll-target="#sec-maf">Step 3 — Remove rare variants by minor allele frequency (MAF)</a></li>
-  <li><a href="#sec-hwe" id="toc-sec-hwe" class="nav-link" data-scroll-target="#sec-hwe">Step 4 — Remove variants failing Hardy–Weinberg equilibrium</a></li>
-  <li><a href="#sec-sexcheck" id="toc-sec-sexcheck" class="nav-link" data-scroll-target="#sec-sexcheck">Step 5 — Check that recorded sex matches the genetic data</a></li>
-  <li><a href="#putting-it-together" id="toc-putting-it-together" class="nav-link" data-scroll-target="#putting-it-together">Putting it together</a></li>
+  <li><a href="#setting-up-your-pdac-gwas-project-structure" id="toc-setting-up-your-pdac-gwas-project-structure" class="nav-link active" data-scroll-target="#setting-up-your-pdac-gwas-project-structure">Setting Up Your PDAC GWAS Project Structure</a>
+  <ul class="collapse">
+  <li><a href="#step-1-create-your-project-folder" id="toc-step-1-create-your-project-folder" class="nav-link" data-scroll-target="#step-1-create-your-project-folder">Step 1: Create Your Project Folder</a></li>
+  <li><a href="#step-2-create-the-directory-structure" id="toc-step-2-create-the-directory-structure" class="nav-link" data-scroll-target="#step-2-create-the-directory-structure">Step 2: Create the Directory Structure</a></li>
+  <li><a href="#final-structure" id="toc-final-structure" class="nav-link" data-scroll-target="#final-structure">Final Structure</a></li>
+  <li><a href="#step-3-get-the-scripts" id="toc-step-3-get-the-scripts" class="nav-link" data-scroll-target="#step-3-get-the-scripts">Step 3: Get the Scripts</a></li>
+  <li><a href="#portable-structure-design" id="toc-portable-structure-design" class="nav-link" data-scroll-target="#portable-structure-design">Portable Structure Design</a></li>
+  <li><a href="#directory-descriptions" id="toc-directory-descriptions" class="nav-link" data-scroll-target="#directory-descriptions">Directory Descriptions</a></li>
+  <li><a href="#quick-verification" id="toc-quick-verification" class="nav-link" data-scroll-target="#quick-verification">Quick Verification</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/mgentiluomo/how-to-gwas-pdac/edit/main/qc.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/mgentiluomo/how-to-gwas-pdac/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/mgentiluomo/how-to-gwas-pdac/edit/main/docs/helpers/SETUP_PROJECT_STRUCTURE.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/mgentiluomo/how-to-gwas-pdac/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./qc.html">Cleaning the data</a></li><li class="breadcrumb-item"><a href="./qc.html">Cleaning your data: quality control</a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title">Cleaning your data: quality control</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
 
 
-</header>
-
-
-<p>Real genotype data is never perfect: some variants are poorly measured, some samples have too much missing data, and a few errors always slip in. <strong>Quality control (QC)</strong> removes these problems <em>before</em> any analysis, so that later results are trustworthy.</p>
-<p>In this section you will apply a few standard filters, <strong>one at a time</strong>. After each one you will look at a number in the log file to confirm it worked — so you always know you are on track.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="How each step works">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>How each step works
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Every step has the same three parts:</p>
+<section id="setting-up-your-pdac-gwas-project-structure" class="level1">
+<h1>Setting Up Your PDAC GWAS Project Structure</h1>
+<p>This guide helps you set up a flexible, portable project folder that works on <strong>any system</strong> without hard-coded paths.</p>
+<hr>
+<section id="step-1-create-your-project-folder" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-create-your-project-folder">Step 1: Create Your Project Folder</h2>
+<p>Choose any location on your computer and create a folder named <code>gwas_tutorial</code>:</p>
+<p><strong>Windows (bash in WSL2):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/gwas_tutorial</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/gwas_tutorial</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>macOS/Linux (bash):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/gwas_tutorial</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/gwas_tutorial</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p><strong>Note:</strong> You can place this folder anywhere. The structure will work from any location because we use relative paths.</p>
+</blockquote>
+<hr>
+</section>
+<section id="step-2-create-the-directory-structure" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-create-the-directory-structure">Step 2: Create the Directory Structure</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create base directories</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="dt">\</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    scripts <span class="dt">\</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    scripts/dev <span class="dt">\</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    demo_data <span class="dt">\</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    tools/bin <span class="dt">\</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    data_processed <span class="dt">\</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    results/<span class="dt">{qc</span><span class="op">,</span><span class="dt">pop_structure</span><span class="op">,</span><span class="dt">imputation</span><span class="op">,</span><span class="dt">association</span><span class="op">,</span><span class="dt">finemapping</span><span class="op">,</span><span class="dt">meta_analysis}</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"✓ Directory structure created"</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> <span class="at">-L</span> 2  <span class="co"># (or: find . -type d -not -path '*/\.*' | sort)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="final-structure" class="level2">
+<h2 class="anchored" data-anchor-id="final-structure">Final Structure</h2>
+<p>After setup, your project looks like this:</p>
+<pre><code>gwas_tutorial/
+│
+├── scripts/
+│   ├── dev/                         # Utility scripts
+│   │   ├── download_demo_data.sh
+│   │   ├── tools_setup.sh
+│   │   ├── test.sh
+│   │   ├── init_project.sh
+│   │   ├── section_manifest.txt
+│   │   ├── script_manifest.txt
+│   │   └── tool_manifest.tsv
+│   │
+│   ├── 01B_genotyping_qc/           # QC pipeline scripts
+│   │   ├── 01_initial_qc_stats.sh
+│   │   ├── 02_sample_callrate.sh
+│   │   ├── ... (9 QC scripts total)
+│   │   └── 09_qc_summary.sh
+│   │
+│   ├── 02_population_stratification/
+│   ├── 03_imputation/
+│   └── ...other sections...
+│
+├── demo_data/                       # Downloaded demo dataset files
+│   ├── pdac_demo.bed
+│   ├── pdac_demo.bim
+│   ├── pdac_demo.fam
+│   ├── phenotype.txt
+│   ├── covariates.txt
+│   ├── survival.txt
+│   └── sample_ancestry.tsv
+│
+├── tools/                           # Local tool installation
+│   ├── bin/                         # Command links used by the tutorial
+│   │   ├── plink
+│   │   ├── plink2
+│   │   ├── metal
+│   │   └── regenie
+│   ├── plink1.9/
+│   ├── plink2/
+│   ├── metal/
+│   ├── micromamba/
+│   ├── micromamba-root/
+│   └── regenie/
+│
+├── data_processed/                  # Processed data outputs
+│   └── (will be populated during QC)
+│
+└── results/                         # Analysis results organized by workflow
+    ├── qc/
+    ├── pop_structure/
+    ├── imputation/
+    ├── association/
+    ├── finemapping/
+    └── meta_analysis/</code></pre>
+<hr>
+</section>
+<section id="step-3-get-the-scripts" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-get-the-scripts">Step 3: Get the Scripts</h2>
+<p>Follow the main guide at <code>getting_started.qmd</code> which provides automated and manual options for downloading scripts in the correct structure.</p>
+<p>The current script-copy step is manifest-based. It copies every section that has a <code>scripts/</code> folder, so future sections can be added without changing the setup test:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/mgentiluomo/how-to-gwas-pdac.git</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> scripts/dev</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> how-to-gwas-pdac/scripts/dev <span class="at">-maxdepth</span> 1 <span class="at">-type</span> f <span class="at">-exec</span> cp {} scripts/dev/ <span class="dt">\;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">:</span> <span class="op">&gt;</span> scripts/dev/section_manifest.txt</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">:</span> <span class="op">&gt;</span> scripts/dev/script_manifest.txt</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> section_dir <span class="kw">in</span> how-to-gwas-pdac/sections/<span class="pp">*</span>/<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="va">section</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$section_dir</span><span class="st">"</span><span class="va">)</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$section_dir</span><span class="st">/scripts"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"scripts/</span><span class="va">$section</span><span class="st">"</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"scripts/</span><span class="va">$section</span><span class="st">"</span> <span class="op">&gt;&gt;</span> scripts/dev/section_manifest.txt</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">find</span> <span class="st">"</span><span class="va">$section_dir</span><span class="st">/scripts"</span> <span class="at">-maxdepth</span> 1 <span class="at">-type</span> f <span class="at">-exec</span> cp {} <span class="st">"scripts/</span><span class="va">$section</span><span class="st">/"</span> <span class="dt">\;</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">find</span> <span class="st">"scripts/</span><span class="va">$section</span><span class="st">"</span> <span class="at">-maxdepth</span> 1 <span class="at">-type</span> f <span class="kw">|</span> <span class="fu">sort</span> <span class="op">&gt;&gt;</span> scripts/dev/script_manifest.txt</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> scripts/dev <span class="at">-maxdepth</span> 1 <span class="at">-type</span> f <span class="at">-name</span> <span class="st">"*.sh"</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="op">&gt;&gt;</span> scripts/dev/script_manifest.txt</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-u</span> scripts/dev/section_manifest.txt <span class="at">-o</span> scripts/dev/section_manifest.txt</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-u</span> scripts/dev/script_manifest.txt <span class="at">-o</span> scripts/dev/script_manifest.txt</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> how-to-gwas-pdac</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <strong>automated approach</strong> uses:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/dev/init_project.sh    <span class="co"># Creates folder structure</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/dev/download_demo_data.sh  <span class="co"># Downloads data + verifies</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/dev/tools_setup.sh     <span class="co"># Installs tools and writes tool_manifest.tsv</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/dev/test.sh            <span class="co"># Tests everything</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <strong>manual approach</strong> is detailed in <code>getting_started.qmd</code> Step 2-6.</p>
+<hr>
+</section>
+<section id="portable-structure-design" class="level2">
+<h2 class="anchored" data-anchor-id="portable-structure-design">Portable Structure Design</h2>
+<p>This structure is <strong>fully portable</strong> because:</p>
 <ol type="1">
-<li><strong>Why</strong> — what the filter does, in plain words.</li>
-<li><strong>Run this</strong> — the command to copy into your terminal.</li>
-<li><strong>✅ Check your work</strong> — the exact line you should find in the log file.</li>
+<li><strong>No hard-coded paths</strong> — All paths are relative (e.g., <code>./scripts/01B_genotyping_qc/</code>)</li>
+<li><strong>Manifest-based checks</strong> — <code>section_manifest.txt</code>, <code>script_manifest.txt</code>, and <code>tool_manifest.tsv</code> tell the setup test what should exist</li>
+<li><strong>Local tools</strong> — Tools are installed or linked under <code>./tools/</code>, not system-wide</li>
+<li><strong>Works anywhere</strong> — Folder can be on Desktop, Documents, USB drive, etc.</li>
+<li><strong>Easy backups</strong> — Entire folder is self-contained, except for large downloaded files you may choose to regenerate</li>
 </ol>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Before you start">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Before you start
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Make sure you have already <a href="./getting_started.html">downloaded the data and tested PLINK</a>, and that your terminal is inside your working folder (the one containing <code>pdac_gwas_demo_full.bed/.bim/.fam</code>).</p>
-</div>
-</div>
-<p>Every PLINK command writes a <code>.log</code> file (named after whatever you put in <code>--out</code>). That log is where you check your work — it is plain text, and you can open it with <code>head</code>, <code>cat</code>, or any text editor.</p>
-<hr>
-<section id="sec-geno" class="level2">
-<h2 class="anchored" data-anchor-id="sec-geno">Step 1 — Remove poorly genotyped variants</h2>
-<p><strong>Why.</strong> Some variants failed to be measured in many individuals (a low “call rate”). A variant missing in too many people is unreliable, so we drop it. The <code>--geno</code> filter removes variants missing in more than a chosen fraction of samples (here, 2%).</p>
-<p><strong>Run this:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--bfile</span> pdac_gwas_demo_full <span class="at">--geno</span> 0.02 <span class="at">--make-bed</span> <span class="at">--out</span> qc_step1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="✅ Check your work">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>✅ Check your work
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Open <code>qc_step1.log</code> and look for this line:</p>
-<pre><code>--geno: 8480 variants removed due to missing genotype data.</code></pre>
-<p>If you see <strong>8480</strong> variants removed, you did it right — those are exactly the poorly genotyped variants built into the demo data.</p>
-</div>
-</div>
 <hr>
 </section>
-<section id="sec-mind" class="level2">
-<h2 class="anchored" data-anchor-id="sec-mind">Step 2 — Remove poorly genotyped samples</h2>
-<p><strong>Why.</strong> The same problem can affect <em>individuals</em>: some samples have too much missing data across all their variants, which usually signals a low-quality sample. The <code>--mind</code> filter removes individuals missing more than a chosen fraction of their genotypes.</p>
-<p><strong>Run this</strong> (note we now start from the cleaned file <code>qc_step1</code>):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--bfile</span> qc_step1 <span class="at">--mind</span> 0.02 <span class="at">--make-bed</span> <span class="at">--out</span> qc_step2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="✅ Check your work">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>✅ Check your work
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Open <code>qc_step2.log</code> and look for:</p>
-<pre><code>--mind: 25 samples removed due to missing genotype data.</code></pre>
-<p><strong>25</strong> samples removed means success — those are the low-quality samples deliberately added to the demo data.</p>
-</div>
-</div>
+<section id="directory-descriptions" class="level2">
+<h2 class="anchored" data-anchor-id="directory-descriptions">Directory Descriptions</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 47%">
+<col style="width: 52%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Folder</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>scripts/dev/</code></td>
+<td>Utility scripts (download, setup, test)</td>
+</tr>
+<tr class="even">
+<td><code>scripts/01B_genotyping_qc/</code></td>
+<td>QC pipeline scripts</td>
+</tr>
+<tr class="odd">
+<td><code>scripts/&lt;section&gt;/</code></td>
+<td>Section scripts copied from <code>sections/&lt;section&gt;/scripts/</code></td>
+</tr>
+<tr class="even">
+<td><code>demo_data/</code></td>
+<td>Demo dataset (7 files)</td>
+</tr>
+<tr class="odd">
+<td><code>tools/bin/</code></td>
+<td>Command links for PLINK1.9, PLINK2, METAL, REGENIE, and future tools</td>
+</tr>
+<tr class="even">
+<td><code>tools/micromamba/</code></td>
+<td>Project-local micromamba executable</td>
+</tr>
+<tr class="odd">
+<td><code>tools/micromamba-root/</code></td>
+<td>Project-local environments such as <code>regenie_env</code></td>
+</tr>
+<tr class="even">
+<td><code>data_processed/</code></td>
+<td>Intermediate outputs</td>
+</tr>
+<tr class="odd">
+<td><code>results/</code></td>
+<td>Final analysis results</td>
+</tr>
+</tbody>
+</table>
 <hr>
 </section>
-<section id="sec-maf" class="level2">
-<h2 class="anchored" data-anchor-id="sec-maf">Step 3 — Remove rare variants by minor allele frequency (MAF)</h2>
-<p><strong>Why.</strong> Very rare variants (carried by only a handful of people) give unstable, unreliable association results in a study of this size. We remove variants whose <strong>minor allele frequency</strong> is below a threshold — here 1% (<code>--maf 0.01</code>).</p>
-<p><strong>Run this:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--bfile</span> qc_step2 <span class="at">--maf</span> 0.015 <span class="at">--make-bed</span> <span class="at">--out</span> qc_step3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="✅ Check your work">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>✅ Check your work
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Open <code>qc_step3.log</code> and look for a line like:</p>
-<pre><code>&lt;NNN&gt; variants removed due to allele frequency threshold(s)
-  (--maf/--max-maf/--mac/--max-mac).</code></pre>
-<p>You should see roughly <span class="pmid">[NNN]</span> variants removed. <em>(Exact number to be locked in from one real run — see note at the bottom.)</em></p>
-</div>
-</div>
+<section id="quick-verification" class="level2">
+<h2 class="anchored" data-anchor-id="quick-verification">Quick Verification</h2>
+<p>To check your structure is correct:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify folders exist</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> scripts/dev/</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> scripts/01B_genotyping_qc/</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> demo_data/</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> tools/bin/</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify manifests</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> scripts/dev/section_manifest.txt</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> scripts/dev/script_manifest.txt</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> scripts/dev/tool_manifest.tsv</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify demo data downloaded (after Step 4)</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> demo_data/ <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span>  <span class="co"># Should show 7 files + header</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify tools installed (after Step 5)</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/dev/test.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <hr>
 </section>
-<section id="sec-hwe" class="level2">
-<h2 class="anchored" data-anchor-id="sec-hwe">Step 4 — Remove variants failing Hardy–Weinberg equilibrium</h2>
-<p><strong>Why.</strong> A strong departure from <strong>Hardy–Weinberg equilibrium</strong> (the expected balance of genotypes in a population) often points to a genotyping error rather than real biology. We remove variants whose departure is extreme (<code>--hwe</code> with a strict p-value cutoff).</p>
-<p><strong>Run this:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--bfile</span> qc_step3 <span class="at">--hwe</span> 1e-6 <span class="at">--make-bed</span> <span class="at">--out</span> qc_step4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="✅ Check your work">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>✅ Check your work
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Open <code>qc_step4.log</code> and look for:</p>
-<pre><code>--hwe: &lt;NNN&gt; variants removed due to Hardy-Weinberg exact test p-value threshold.</code></pre>
-<p>You should see about <span class="pmid">[NNN]</span> variants removed. <em>(Exact number to be locked in from one real run.)</em></p>
-</div>
-</div>
-<hr>
-</section>
-<section id="sec-sexcheck" class="level2">
-<h2 class="anchored" data-anchor-id="sec-sexcheck">Step 5 — Check that recorded sex matches the genetic data</h2>
-<p><strong>Why.</strong> A useful sanity check is whether each person’s recorded sex matches the sex inferred from their X chromosome. A mismatch usually means a sample mix-up. This check <strong>reports</strong> problems rather than removing data automatically.</p>
-<p><strong>Run this:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> qc_step4 <span class="at">--check-sex</span> <span class="at">--out</span> qc_sexcheck</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="✅ Check your work">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>✅ Check your work
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Count the flagged samples in the result:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> PROBLEM qc_sexcheck.sexcheck</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>You should find <strong>4</strong> samples flagged as <code>PROBLEM</code> — exactly the four sex discordances built into the demo data. In a real study you would investigate and usually remove these.</p>
-</div>
-</div>
-<hr>
-</section>
-<section id="putting-it-together" class="level2">
-<h2 class="anchored" data-anchor-id="putting-it-together">Putting it together</h2>
-<p>Once you understand each filter, you can apply them in a single command:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink2</span> <span class="at">--bfile</span> pdac_gwas_demo_full <span class="dt">\</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">--geno</span> 0.02 <span class="at">--mind</span> 0.02 <span class="at">--maf</span> 0.01 <span class="at">--hwe</span> 1e-6 <span class="dt">\</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">--make-bed</span> <span class="at">--out</span> pdac_gwas_demo_qc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The result, <code>pdac_gwas_demo_qc</code>, is your cleaned dataset — the starting point for the next sections.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Why we filter one step at a time first">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Why we filter one step at a time first
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Running the filters separately lets you <em>see</em> how many variants or samples each one removes — which is how you catch a problem early. The order can slightly change the final counts, so for reproducible results always report the exact commands and thresholds you used.</p>
-</div>
-</div>
-<hr>
-<div class="callout callout-style-default callout-important callout-titled" title="A note on the exact numbers">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>A note on the exact numbers
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The counts above for <strong>call rate (8,480 variants), sample missingness (25 samples), and sex check (4 samples)</strong> are the artefacts deliberately built into the demo dataset, so they are the targets to confirm. The <strong>MAF</strong> and <strong>HWE</strong> removal counts depend on the exact thresholds and on filter order, so they are shown as placeholders. Run the pipeline once on the demo data and the precise numbers will appear in the logs — drop them in here (or share the <code>.log</code>) and the check boxes can state the exact figures.</p>
-</div>
-</div>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">Next Steps</h2>
+<p>Once your structure is set up, follow the main guide to: 1. Download scripts (Step 3 in <code>getting_started.qmd</code>) 2. Download demo data (Step 4) 3. Install tools (Step 5) 4. Test everything (Step 6) 5. Run your first QC pipeline!</p>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
@@ -664,7 +694,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/mgentiluomo\.github\.io\/how-to-gwas-pdac\/");
+        var filterRegex = new RegExp("https:\/\/biomguler\.github\.io\/how-to-gwas-pdac\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -991,18 +1021,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="./getting_started.html" class="pagination-link" aria-label="Before you start: setup and your first PLINK command">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Before you start: setup and your first PLINK command</span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-  </div>
-</nav>
 </div> <!-- /content -->
 
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/mgentiluomo/how-to-gwas-pdac/edit/main/qc.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/mgentiluomo/how-to-gwas-pdac/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/mgentiluomo/how-to-gwas-pdac/edit/main/docs/helpers/SETUP_PROJECT_STRUCTURE.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/mgentiluomo/how-to-gwas-pdac/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

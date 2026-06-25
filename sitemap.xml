@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://mgentiluomo.github.io/how-to-gwas-pdac/qc.html</loc>
-    <lastmod>2026-06-09T07:59:15.220Z</lastmod>
+    <loc>https://biomguler.github.io/how-to-gwas-pdac/sections/01B_genotyping_qc/01B_genotyping_qc.html</loc>
+    <lastmod>2026-06-25T16:35:55.064Z</lastmod>
   </url>
   <url>
-    <loc>https://mgentiluomo.github.io/how-to-gwas-pdac/getting_started.html</loc>
-    <lastmod>2026-06-10T15:20:21.681Z</lastmod>
+    <loc>https://biomguler.github.io/how-to-gwas-pdac/getting_started.html</loc>
+    <lastmod>2026-06-25T16:35:55.058Z</lastmod>
   </url>
   <url>
-    <loc>https://mgentiluomo.github.io/how-to-gwas-pdac/CONTRIBUTING.html</loc>
-    <lastmod>2026-06-08T15:18:35.959Z</lastmod>
+    <loc>https://biomguler.github.io/how-to-gwas-pdac/docs/helpers/SETUP_PROJECT_STRUCTURE.html</loc>
+    <lastmod>2026-06-25T16:35:55.042Z</lastmod>
   </url>
   <url>
-    <loc>https://mgentiluomo.github.io/how-to-gwas-pdac/index.html</loc>
-    <lastmod>2026-06-09T11:58:12.158Z</lastmod>
+    <loc>https://biomguler.github.io/how-to-gwas-pdac/CONTRIBUTING.html</loc>
+    <lastmod>2026-06-25T16:35:55.036Z</lastmod>
+  </url>
+  <url>
+    <loc>https://biomguler.github.io/how-to-gwas-pdac/docs/helpers/WSL_SETUP.html</loc>
+    <lastmod>2026-06-25T16:35:55.042Z</lastmod>
+  </url>
+  <url>
+    <loc>https://biomguler.github.io/how-to-gwas-pdac/index.html</loc>
+    <lastmod>2026-06-25T16:35:55.059Z</lastmod>
   </url>
 </urlset>
